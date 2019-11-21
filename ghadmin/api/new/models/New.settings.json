@@ -1,0 +1,39 @@
+{
+  "connection": "strapi",
+  "collectionName": "new",
+  "info": {
+    "name": "new",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "date_publish": {
+      "type": "date"
+    },
+    "content": {
+      "type": "text"
+    },
+    "type": {
+      "enum": [
+        "slider",
+        "primary",
+        "secondary"
+      ],
+      "type": "enumeration"
+    },
+    "description": {
+      "maxLength": 60,
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    }
+  }
+}

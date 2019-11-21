@@ -115,6 +115,8 @@ input editNewInput {
   name: String
   date_publish: DateTime
   content: String
+  type: ENUM_NEW_TYPE
+  description: String
 }
 
 input editRoleInput {
@@ -139,6 +141,12 @@ input editUserInput {
 enum ENUM_MENUBAR_PLACE {
   main
   side
+}
+
+enum ENUM_NEW_TYPE {
+  slider
+  primary
+  secondary
 }
 
 input FileInput {
@@ -368,7 +376,7 @@ input MenutabInput {
   menubar: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | NewConnectionType | NewConnectionDescription | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createMenubar(input: createMenubarInput): createMenubarPayload
@@ -409,6 +417,8 @@ type New {
   name: String
   date_publish: DateTime
   content: String
+  type: ENUM_NEW_TYPE
+  description: String
 }
 
 type NewAggregator {
@@ -442,12 +452,22 @@ type NewConnectionDate_publish {
   connection: NewConnection
 }
 
+type NewConnectionDescription {
+  key: String
+  connection: NewConnection
+}
+
 type NewConnectionId {
   key: ID
   connection: NewConnection
 }
 
 type NewConnectionName {
+  key: String
+  connection: NewConnection
+}
+
+type NewConnectionType {
   key: String
   connection: NewConnection
 }
@@ -465,12 +485,16 @@ type NewGroupBy {
   name: [NewConnectionName]
   date_publish: [NewConnectionDate_publish]
   content: [NewConnectionContent]
+  type: [NewConnectionType]
+  description: [NewConnectionDescription]
 }
 
 input NewInput {
   name: String
   date_publish: DateTime
   content: String
+  type: ENUM_NEW_TYPE
+  description: String
 }
 
 type Query {

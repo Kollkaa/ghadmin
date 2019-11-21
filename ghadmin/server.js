@@ -10,9 +10,11 @@
 
 process.chdir(__dirname);
 
+let http = require("http");
+
 (() => {
   const strapi = require('strapi');
 
-  strapi.start();
 
+  strapi.start();
 })();

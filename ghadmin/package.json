@@ -20,10 +20,13 @@
     "eslint-plugin-react": "^7.7.0"
   },
   "dependencies": {
+    "core-util-is": "^1.0.2",
+    "froala-editor": "^3.0.6",
     "knex": "latest",
     "lodash": "^4.17.5",
     "sqlite3": "latest",
     "strapi": "3.0.0-alpha.26.2",
+    "strapi-helper-plugin": "^3.0.0-beta.17.5",
     "strapi-hook-bookshelf": "3.0.0-alpha.26.2",
     "strapi-hook-knex": "3.0.0-alpha.26.2",
     "strapi-hook-mongoose": "^3.0.0-alpha.26.2",

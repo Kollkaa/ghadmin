@@ -1,17 +1,25 @@
-input createMenubarsInput {
-  data: MenubarsInput
+input createMenubarInput {
+  data: MenubarInput
 }
 
-type createMenubarsPayload {
-  menubar: Menubars
+type createMenubarPayload {
+  menubar: Menubar
 }
 
-input createMenutabsInput {
-  data: MenutabsInput
+input createMenutabInput {
+  data: MenutabInput
 }
 
-type createMenutabsPayload {
-  menutab: Menutabs
+type createMenutabPayload {
+  menutab: Menutab
+}
+
+input createNewInput {
+  data: NewInput
+}
+
+type createNewPayload {
+  new: New
 }
 
 input createRoleInput {
@@ -35,20 +43,28 @@ The `DateTime` scalar represents a date and time following the ISO 8601 standard
 """
 scalar DateTime
 
-input deleteMenubarsInput {
+input deleteMenubarInput {
   where: InputID
 }
 
-type deleteMenubarsPayload {
-  menubar: Menubars
+type deleteMenubarPayload {
+  menubar: Menubar
 }
 
-input deleteMenutabsInput {
+input deleteMenutabInput {
   where: InputID
 }
 
-type deleteMenutabsPayload {
-  menutab: Menutabs
+type deleteMenutabPayload {
+  menutab: Menutab
+}
+
+input deleteNewInput {
+  where: InputID
+}
+
+type deleteNewPayload {
+  new: New
 }
 
 input deleteRoleInput {
@@ -80,14 +96,25 @@ input editFileInput {
   related: [ID]
 }
 
-input editMenubarsInput {
-  name: String
-  context: String
+input editMenubarInput {
+  title: String
+  order: Int
+  place: ENUM_MENUBAR_PLACE
+  href: String
+  menutabs: [ID]
 }
 
-input editMenutabsInput {
+input editMenutabInput {
+  title: String
+  order: Int
+  href: String
+  menubar: ID
+}
+
+input editNewInput {
   name: String
-  context: String
+  date_publish: DateTime
+  content: String
 }
 
 input editRoleInput {
@@ -107,6 +134,11 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+}
+
+enum ENUM_MENUBAR_PLACE {
+  main
+  side
 }
 
 input FileInput {
@@ -134,40 +166,220 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-type Menubars {
+type Menubar {
+  _id: ID!
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  name: String
-  context: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  order: Int
+  place: ENUM_MENUBAR_PLACE
+  href: String
+  menutabs(sort: String, limit: Int, start: Int, where: JSON): [Menutab]
 }
 
-input MenubarsInput {
-  name: String
-  context: String
+type MenubarAggregator {
+  count: Int
+  totalCount: Int
+  sum: MenubarAggregatorSum
+  avg: MenubarAggregatorAvg
+  min: MenubarAggregatorMin
+  max: MenubarAggregatorMax
 }
 
-type Menutabs {
-  undefined: ID!
+type MenubarAggregatorAvg {
+  order: Float
+}
+
+type MenubarAggregatorMax {
+  order: Float
+}
+
+type MenubarAggregatorMin {
+  order: Float
+}
+
+type MenubarAggregatorSum {
+  order: Float
+}
+
+type MenubarConnection {
+  values: [Menubar]
+  groupBy: MenubarGroupBy
+  aggregate: MenubarAggregator
+}
+
+type MenubarConnection_id {
+  key: ID
+  connection: MenubarConnection
+}
+
+type MenubarConnectionCreatedAt {
+  key: DateTime
+  connection: MenubarConnection
+}
+
+type MenubarConnectionHref {
+  key: String
+  connection: MenubarConnection
+}
+
+type MenubarConnectionId {
+  key: ID
+  connection: MenubarConnection
+}
+
+type MenubarConnectionOrder {
+  key: Int
+  connection: MenubarConnection
+}
+
+type MenubarConnectionPlace {
+  key: String
+  connection: MenubarConnection
+}
+
+type MenubarConnectionTitle {
+  key: String
+  connection: MenubarConnection
+}
+
+type MenubarConnectionUpdatedAt {
+  key: DateTime
+  connection: MenubarConnection
+}
+
+type MenubarGroupBy {
+  _id: [MenubarConnection_id]
+  id: [MenubarConnectionId]
+  createdAt: [MenubarConnectionCreatedAt]
+  updatedAt: [MenubarConnectionUpdatedAt]
+  title: [MenubarConnectionTitle]
+  order: [MenubarConnectionOrder]
+  place: [MenubarConnectionPlace]
+  href: [MenubarConnectionHref]
+}
+
+input MenubarInput {
+  title: String
+  order: Int
+  place: ENUM_MENUBAR_PLACE
+  href: String
+  menutabs: [ID]
+}
+
+type Menutab {
+  _id: ID!
   id: ID!
-  name: String
-  context: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String
+  order: Int
+  href: String
+  menubar: Menubar
 }
 
-input MenutabsInput {
-  name: String
-  context: String
+type MenutabAggregator {
+  count: Int
+  totalCount: Int
+  sum: MenutabAggregatorSum
+  avg: MenutabAggregatorAvg
+  min: MenutabAggregatorMin
+  max: MenutabAggregatorMax
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubars | createMenubarsPayload | updateMenubarsPayload | deleteMenubarsPayload | Menutabs | createMenutabsPayload | updateMenutabsPayload | deleteMenutabsPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+type MenutabAggregatorAvg {
+  order: Float
+}
+
+type MenutabAggregatorMax {
+  order: Float
+}
+
+type MenutabAggregatorMin {
+  order: Float
+}
+
+type MenutabAggregatorSum {
+  order: Float
+}
+
+type MenutabConnection {
+  values: [Menutab]
+  groupBy: MenutabGroupBy
+  aggregate: MenutabAggregator
+}
+
+type MenutabConnection_id {
+  key: ID
+  connection: MenutabConnection
+}
+
+type MenutabConnectionCreatedAt {
+  key: DateTime
+  connection: MenutabConnection
+}
+
+type MenutabConnectionHref {
+  key: String
+  connection: MenutabConnection
+}
+
+type MenutabConnectionId {
+  key: ID
+  connection: MenutabConnection
+}
+
+type MenutabConnectionMenubar {
+  key: ID
+  connection: MenutabConnection
+}
+
+type MenutabConnectionOrder {
+  key: Int
+  connection: MenutabConnection
+}
+
+type MenutabConnectionTitle {
+  key: String
+  connection: MenutabConnection
+}
+
+type MenutabConnectionUpdatedAt {
+  key: DateTime
+  connection: MenutabConnection
+}
+
+type MenutabGroupBy {
+  _id: [MenutabConnection_id]
+  id: [MenutabConnectionId]
+  createdAt: [MenutabConnectionCreatedAt]
+  updatedAt: [MenutabConnectionUpdatedAt]
+  title: [MenutabConnectionTitle]
+  order: [MenutabConnectionOrder]
+  href: [MenutabConnectionHref]
+  menubar: [MenutabConnectionMenubar]
+}
+
+input MenutabInput {
+  title: String
+  order: Int
+  href: String
+  menubar: ID
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
-  createMenubars(input: createMenubarsInput): createMenubarsPayload
-  updateMenubars(input: updateMenubarsInput): updateMenubarsPayload
-  deleteMenubars(input: deleteMenubarsInput): deleteMenubarsPayload
-  createMenutabs(input: createMenutabsInput): createMenutabsPayload
-  updateMenutabs(input: updateMenutabsInput): updateMenutabsPayload
-  deleteMenutabs(input: deleteMenutabsInput): deleteMenutabsPayload
+  createMenubar(input: createMenubarInput): createMenubarPayload
+  updateMenubar(input: updateMenubarInput): updateMenubarPayload
+  deleteMenubar(input: deleteMenubarInput): deleteMenubarPayload
+  createMenutab(input: createMenutabInput): createMenutabPayload
+  updateMenutab(input: updateMenutabInput): updateMenutabPayload
+  deleteMenutab(input: deleteMenutabInput): deleteMenutabPayload
+  createNew(input: createNewInput): createNewPayload
+  updateNew(input: updateNewInput): updateNewPayload
+  deleteNew(input: deleteNewInput): deleteNewPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -189,11 +401,88 @@ type Mutation {
   upload(refId: ID, ref: String, source: String, file: Upload!): UploadFile!
 }
 
+type New {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  date_publish: DateTime
+  content: String
+}
+
+type NewAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type NewConnection {
+  values: [New]
+  groupBy: NewGroupBy
+  aggregate: NewAggregator
+}
+
+type NewConnection_id {
+  key: ID
+  connection: NewConnection
+}
+
+type NewConnectionContent {
+  key: String
+  connection: NewConnection
+}
+
+type NewConnectionCreatedAt {
+  key: DateTime
+  connection: NewConnection
+}
+
+type NewConnectionDate_publish {
+  key: DateTime
+  connection: NewConnection
+}
+
+type NewConnectionId {
+  key: ID
+  connection: NewConnection
+}
+
+type NewConnectionName {
+  key: String
+  connection: NewConnection
+}
+
+type NewConnectionUpdatedAt {
+  key: DateTime
+  connection: NewConnection
+}
+
+type NewGroupBy {
+  _id: [NewConnection_id]
+  id: [NewConnectionId]
+  createdAt: [NewConnectionCreatedAt]
+  updatedAt: [NewConnectionUpdatedAt]
+  name: [NewConnectionName]
+  date_publish: [NewConnectionDate_publish]
+  content: [NewConnectionContent]
+}
+
+input NewInput {
+  name: String
+  date_publish: DateTime
+  content: String
+}
+
 type Query {
-  menubar(id: ID!): Menubars
-  menubars(sort: String, limit: Int, start: Int, where: JSON): [Menubars]
-  menutab(id: ID!): Menutabs
-  menutabs(sort: String, limit: Int, start: Int, where: JSON): [Menutabs]
+  menubar(id: ID!): Menubar
+  menubars(sort: String, limit: Int, start: Int, where: JSON): [Menubar]
+  menubarsConnection(sort: String, limit: Int, start: Int, where: JSON): MenubarConnection
+  menutab(id: ID!): Menutab
+  menutabs(sort: String, limit: Int, start: Int, where: JSON): [Menutab]
+  menutabsConnection(sort: String, limit: Int, start: Int, where: JSON): MenutabConnection
+  new(id: ID!): New
+  news(sort: String, limit: Int, start: Int, where: JSON): [New]
+  newsConnection(sort: String, limit: Int, start: Int, where: JSON): NewConnection
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -214,22 +503,31 @@ input RoleInput {
   users: [ID]
 }
 
-input updateMenubarsInput {
+input updateMenubarInput {
   where: InputID
-  data: editMenubarsInput
+  data: editMenubarInput
 }
 
-type updateMenubarsPayload {
-  menubar: Menubars
+type updateMenubarPayload {
+  menubar: Menubar
 }
 
-input updateMenutabsInput {
+input updateMenutabInput {
   where: InputID
-  data: editMenutabsInput
+  data: editMenutabInput
 }
 
-type updateMenutabsPayload {
-  menutab: Menutabs
+type updateMenutabPayload {
+  menutab: Menutab
+}
+
+input updateNewInput {
+  where: InputID
+  data: editNewInput
+}
+
+type updateNewPayload {
+  new: New
 }
 
 input updateRoleInput {

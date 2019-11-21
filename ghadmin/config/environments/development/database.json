@@ -1,5 +1,5 @@
 {
-  "defaultConnection": "database",
+  "defaultConnection": "strapi",
   "connections": {
     "default": {
       "connector": "strapi-hook-bookshelf",
@@ -10,7 +10,23 @@
       "options": {
         "useNullAsDefault": true
       }
-    }
+    },
+
+    "strapi": {
+      "connector": "strapi-hook-mongoose",
+      "settings": {
+        "client": "mongo",
+        "host": "192.168.0.25",
+        "port": 27017,
+        "database": "strapi",
+        "username": "",
+        "password": ""
+      },
+      "options": {
+        "useNullAsDefault": true
+      }
+
+}
 
   }
 }

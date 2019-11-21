@@ -12,19 +12,7 @@ process.chdir(__dirname);
 
 (() => {
   const strapi = require('strapi');
+
   strapi.start();
+
 })();
-//,
-//
-//   "database": {
-//     "connector": "strapi-hook-mongoose",
-//     "settings": {
-//       "client": "mongo",
-//       "host": "192.168.0.25",
-//       "port": 27017,
-//       "database": "strapi",
-//       "username": "",
-//       "password": ""
-//     },
-//     "options": {}
-//   }

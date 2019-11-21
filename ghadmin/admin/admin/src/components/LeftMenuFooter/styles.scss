@@ -4,7 +4,7 @@
 .leftMenuFooter { /* stylelint-disable */
   position: absolute;
   width: 100%;
-  background: $left-menu-bg;
+  background: #1e4157;
   bottom: 0;
 }
 
@@ -12,6 +12,7 @@
   list-style: none;
   padding: 0;
   margin-bottom: 0;
+  color: #212f43;
 }
 
 .poweredBy {
@@ -26,5 +27,5 @@
   font-weight: 400;
   letter-spacing: 0.05rem;
   vertical-align: middle;
-  color: $strapi-gray-light;
+  color:#C2CDE0
 }

@@ -1,14 +1,14 @@
 {
   "documentation": {
     "id": "app.components.LeftMenuFooter.documentation",
-    "defaultMessage": "Документація"
+    "defaultMessage": "Documentation"
   },
   "help": {
     "id": "app.components.LeftMenuFooter.help",
-    "defaultMessage": "Допомога"
+    "defaultMessage": "Help"
   },
   "poweredBy": {
     "id": "app.components.LeftMenuFooter.poweredBy",
-    "defaultMessage": "Proudly powered by "
+    "defaultMessage": "Генеральний штаб ЗС України "
   }
 }

@@ -1,0 +1,12 @@
+// Import
+@import "../../styles/variables/variables";
+
+.leftMenu { /* stylelint-ignore */
+  background: #6f42c1;
+  height: 100vh;
+  width: $left-menu-width;
+  float: left;
+  position: fixed;
+  top: 0;
+  left: 0;
+}

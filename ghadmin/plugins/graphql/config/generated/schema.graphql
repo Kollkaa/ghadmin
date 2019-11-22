@@ -30,6 +30,14 @@ type createRolePayload {
   role: UsersPermissionsRole
 }
 
+input createTestInput {
+  data: TestInput
+}
+
+type createTestPayload {
+  test: Test
+}
+
 input createUserInput {
   data: UserInput
 }
@@ -73,6 +81,14 @@ input deleteRoleInput {
 
 type deleteRolePayload {
   role: UsersPermissionsRole
+}
+
+input deleteTestInput {
+  where: InputID
+}
+
+type deleteTestPayload {
+  test: Test
 }
 
 input deleteUserInput {
@@ -125,6 +141,10 @@ input editRoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+input editTestInput {
+  img: ID
 }
 
 input editUserInput {
@@ -376,7 +396,7 @@ input MenutabInput {
   menubar: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | NewConnectionType | NewConnectionDescription | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | NewConnectionType | NewConnectionDescription | Test | createTestPayload | updateTestPayload | deleteTestPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createMenubar(input: createMenubarInput): createMenubarPayload
@@ -388,6 +408,9 @@ type Mutation {
   createNew(input: createNewInput): createNewPayload
   updateNew(input: updateNewInput): updateNewPayload
   deleteNew(input: deleteNewInput): deleteNewPayload
+  createTest(input: createTestInput): createTestPayload
+  updateTest(input: updateTestInput): updateTestPayload
+  deleteTest(input: deleteTestInput): deleteTestPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -507,6 +530,8 @@ type Query {
   new(id: ID!): New
   news(sort: String, limit: Int, start: Int, where: JSON): [New]
   newsConnection(sort: String, limit: Int, start: Int, where: JSON): NewConnection
+  test(id: ID!): Test
+  tests(sort: String, limit: Int, start: Int, where: JSON): [Test]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -525,6 +550,17 @@ input RoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+type Test {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  img: UploadFile
+}
+
+input TestInput {
+  img: ID
 }
 
 input updateMenubarInput {
@@ -561,6 +597,15 @@ input updateRoleInput {
 
 type updateRolePayload {
   role: UsersPermissionsRole
+}
+
+input updateTestInput {
+  where: InputID
+  data: editTestInput
+}
+
+type updateTestPayload {
+  test: Test
 }
 
 input updateUserInput {

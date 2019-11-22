@@ -1,6 +1,6 @@
 {
   "connection": "strapi",
-  "collectionName": "",
+  "collectionName": "menutab",
   "info": {
     "name": "menutab",
     "description": ""

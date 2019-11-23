@@ -1,0 +1,38 @@
+{
+  "connection": "strapi",
+  "collectionName": "",
+  "info": {
+    "name": "novosti",
+    "description": ""
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "content": {
+      "type": "text"
+    },
+    "description": {
+      "type": "string"
+    },
+    "date_publish": {
+      "type": "date"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "type": {
+      "enum": [
+        "slider",
+        "primary",
+        "secondary"
+      ],
+      "type": "enumeration"
+    }
+  }
+}

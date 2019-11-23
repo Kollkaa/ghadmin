@@ -1,0 +1,23 @@
+{
+  "connection": "strapi",
+  "collectionName": "tests",
+  "info": {
+    "name": "test",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "img": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "sfd": {
+      "type": "date"
+    }
+  }
+}

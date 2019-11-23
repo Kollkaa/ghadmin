@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/novostis",
+      "handler": "Novosti.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/novostis/count",
+      "handler": "Novosti.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/novostis/:_id",
+      "handler": "Novosti.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/novostis",
+      "handler": "Novosti.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/novostis/:_id",
+      "handler": "Novosti.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/novostis/:_id",
+      "handler": "Novosti.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

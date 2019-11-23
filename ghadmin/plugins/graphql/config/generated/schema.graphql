@@ -22,6 +22,14 @@ type createNewPayload {
   new: New
 }
 
+input createNovostiInput {
+  data: NovostiInput
+}
+
+type createNovostiPayload {
+  novosti: Novosti
+}
+
 input createRoleInput {
   data: RoleInput
 }
@@ -73,6 +81,14 @@ input deleteNewInput {
 
 type deleteNewPayload {
   new: New
+}
+
+input deleteNovostiInput {
+  where: InputID
+}
+
+type deleteNovostiPayload {
+  novosti: Novosti
 }
 
 input deleteRoleInput {
@@ -129,10 +145,19 @@ input editMenutabInput {
 
 input editNewInput {
   name: String
-  date_publish: DateTime
   content: String
+  date_publish: DateTime
   type: ENUM_NEW_TYPE
   description: String
+}
+
+input editNovostiInput {
+  name: String
+  content: String
+  description: String
+  date_publish: DateTime
+  image: ID
+  type: ENUM_NOVOSTI_TYPE
 }
 
 input editRoleInput {
@@ -145,6 +170,7 @@ input editRoleInput {
 
 input editTestInput {
   img: ID
+  sfd: DateTime
 }
 
 input editUserInput {
@@ -164,6 +190,12 @@ enum ENUM_MENUBAR_PLACE {
 }
 
 enum ENUM_NEW_TYPE {
+  slider
+  primary
+  secondary
+}
+
+enum ENUM_NOVOSTI_TYPE {
   slider
   primary
   secondary
@@ -396,7 +428,7 @@ input MenutabInput {
   menubar: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionDate_publish | NewConnectionContent | NewConnectionType | NewConnectionDescription | Test | createTestPayload | updateTestPayload | deleteTestPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Menubar | createMenubarPayload | updateMenubarPayload | deleteMenubarPayload | MenubarConnection | MenubarAggregator | MenubarAggregatorSum | MenubarAggregatorAvg | MenubarAggregatorMin | MenubarAggregatorMax | MenubarGroupBy | MenubarConnection_id | MenubarConnectionId | MenubarConnectionCreatedAt | MenubarConnectionUpdatedAt | MenubarConnectionTitle | MenubarConnectionOrder | MenubarConnectionPlace | MenubarConnectionHref | Menutab | createMenutabPayload | updateMenutabPayload | deleteMenutabPayload | MenutabConnection | MenutabAggregator | MenutabAggregatorSum | MenutabAggregatorAvg | MenutabAggregatorMin | MenutabAggregatorMax | MenutabGroupBy | MenutabConnection_id | MenutabConnectionId | MenutabConnectionCreatedAt | MenutabConnectionUpdatedAt | MenutabConnectionTitle | MenutabConnectionOrder | MenutabConnectionHref | MenutabConnectionMenubar | New | createNewPayload | updateNewPayload | deleteNewPayload | NewConnection | NewAggregator | NewGroupBy | NewConnection_id | NewConnectionId | NewConnectionCreatedAt | NewConnectionUpdatedAt | NewConnectionName | NewConnectionContent | NewConnectionDate_publish | NewConnectionType | NewConnectionDescription | Novosti | createNovostiPayload | updateNovostiPayload | deleteNovostiPayload | NovostiConnection | NovostiAggregator | NovostiGroupBy | NovostiConnection_id | NovostiConnectionId | NovostiConnectionCreatedAt | NovostiConnectionUpdatedAt | NovostiConnectionName | NovostiConnectionContent | NovostiConnectionDescription | NovostiConnectionDate_publish | NovostiConnectionImage | NovostiConnectionType | Test | createTestPayload | updateTestPayload | deleteTestPayload | TestConnection | TestAggregator | TestGroupBy | TestConnection_id | TestConnectionId | TestConnectionCreatedAt | TestConnectionUpdatedAt | TestConnectionImg | TestConnectionSfd | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createMenubar(input: createMenubarInput): createMenubarPayload
@@ -408,6 +440,9 @@ type Mutation {
   createNew(input: createNewInput): createNewPayload
   updateNew(input: updateNewInput): updateNewPayload
   deleteNew(input: deleteNewInput): deleteNewPayload
+  createNovosti(input: createNovostiInput): createNovostiPayload
+  updateNovosti(input: updateNovostiInput): updateNovostiPayload
+  deleteNovosti(input: deleteNovostiInput): deleteNovostiPayload
   createTest(input: createTestInput): createTestPayload
   updateTest(input: updateTestInput): updateTestPayload
   deleteTest(input: deleteTestInput): deleteTestPayload
@@ -438,8 +473,8 @@ type New {
   createdAt: DateTime!
   updatedAt: DateTime!
   name: String
-  date_publish: DateTime
   content: String
+  date_publish: DateTime
   type: ENUM_NEW_TYPE
   description: String
 }
@@ -506,18 +541,114 @@ type NewGroupBy {
   createdAt: [NewConnectionCreatedAt]
   updatedAt: [NewConnectionUpdatedAt]
   name: [NewConnectionName]
-  date_publish: [NewConnectionDate_publish]
   content: [NewConnectionContent]
+  date_publish: [NewConnectionDate_publish]
   type: [NewConnectionType]
   description: [NewConnectionDescription]
 }
 
 input NewInput {
   name: String
-  date_publish: DateTime
   content: String
+  date_publish: DateTime
   type: ENUM_NEW_TYPE
   description: String
+}
+
+type Novosti {
+  _id: ID!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  name: String
+  content: String
+  description: String
+  date_publish: DateTime
+  image: UploadFile
+  type: ENUM_NOVOSTI_TYPE
+}
+
+type NovostiAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type NovostiConnection {
+  values: [Novosti]
+  groupBy: NovostiGroupBy
+  aggregate: NovostiAggregator
+}
+
+type NovostiConnection_id {
+  key: ID
+  connection: NovostiConnection
+}
+
+type NovostiConnectionContent {
+  key: String
+  connection: NovostiConnection
+}
+
+type NovostiConnectionCreatedAt {
+  key: DateTime
+  connection: NovostiConnection
+}
+
+type NovostiConnectionDate_publish {
+  key: DateTime
+  connection: NovostiConnection
+}
+
+type NovostiConnectionDescription {
+  key: String
+  connection: NovostiConnection
+}
+
+type NovostiConnectionId {
+  key: ID
+  connection: NovostiConnection
+}
+
+type NovostiConnectionImage {
+  key: ID
+  connection: NovostiConnection
+}
+
+type NovostiConnectionName {
+  key: String
+  connection: NovostiConnection
+}
+
+type NovostiConnectionType {
+  key: String
+  connection: NovostiConnection
+}
+
+type NovostiConnectionUpdatedAt {
+  key: DateTime
+  connection: NovostiConnection
+}
+
+type NovostiGroupBy {
+  _id: [NovostiConnection_id]
+  id: [NovostiConnectionId]
+  createdAt: [NovostiConnectionCreatedAt]
+  updatedAt: [NovostiConnectionUpdatedAt]
+  name: [NovostiConnectionName]
+  content: [NovostiConnectionContent]
+  description: [NovostiConnectionDescription]
+  date_publish: [NovostiConnectionDate_publish]
+  image: [NovostiConnectionImage]
+  type: [NovostiConnectionType]
+}
+
+input NovostiInput {
+  name: String
+  content: String
+  description: String
+  date_publish: DateTime
+  image: ID
+  type: ENUM_NOVOSTI_TYPE
 }
 
 type Query {
@@ -530,8 +661,12 @@ type Query {
   new(id: ID!): New
   news(sort: String, limit: Int, start: Int, where: JSON): [New]
   newsConnection(sort: String, limit: Int, start: Int, where: JSON): NewConnection
+  novosti(id: ID!): Novosti
+  novostis(sort: String, limit: Int, start: Int, where: JSON): [Novosti]
+  novostisConnection(sort: String, limit: Int, start: Int, where: JSON): NovostiConnection
   test(id: ID!): Test
   tests(sort: String, limit: Int, start: Int, where: JSON): [Test]
+  testsConnection(sort: String, limit: Int, start: Int, where: JSON): TestConnection
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -553,14 +688,67 @@ input RoleInput {
 }
 
 type Test {
+  _id: ID!
   id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
   img: UploadFile
+  sfd: DateTime
+}
+
+type TestAggregator {
+  count: Int
+  totalCount: Int
+}
+
+type TestConnection {
+  values: [Test]
+  groupBy: TestGroupBy
+  aggregate: TestAggregator
+}
+
+type TestConnection_id {
+  key: ID
+  connection: TestConnection
+}
+
+type TestConnectionCreatedAt {
+  key: DateTime
+  connection: TestConnection
+}
+
+type TestConnectionId {
+  key: ID
+  connection: TestConnection
+}
+
+type TestConnectionImg {
+  key: ID
+  connection: TestConnection
+}
+
+type TestConnectionSfd {
+  key: DateTime
+  connection: TestConnection
+}
+
+type TestConnectionUpdatedAt {
+  key: DateTime
+  connection: TestConnection
+}
+
+type TestGroupBy {
+  _id: [TestConnection_id]
+  id: [TestConnectionId]
+  createdAt: [TestConnectionCreatedAt]
+  updatedAt: [TestConnectionUpdatedAt]
+  img: [TestConnectionImg]
+  sfd: [TestConnectionSfd]
 }
 
 input TestInput {
   img: ID
+  sfd: DateTime
 }
 
 input updateMenubarInput {
@@ -588,6 +776,15 @@ input updateNewInput {
 
 type updateNewPayload {
   new: New
+}
+
+input updateNovostiInput {
+  where: InputID
+  data: editNovostiInput
+}
+
+type updateNovostiPayload {
+  novosti: Novosti
 }
 
 input updateRoleInput {

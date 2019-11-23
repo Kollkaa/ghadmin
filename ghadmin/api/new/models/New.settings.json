@@ -1,6 +1,6 @@
 {
   "connection": "strapi",
-  "collectionName": "new",
+  "collectionName": "",
   "info": {
     "name": "new",
     "description": ""
@@ -12,11 +12,11 @@
     "name": {
       "type": "string"
     },
-    "date_publish": {
-      "type": "date"
-    },
     "content": {
       "type": "text"
+    },
+    "date_publish": {
+      "type": "date"
     },
     "type": {
       "enum": [

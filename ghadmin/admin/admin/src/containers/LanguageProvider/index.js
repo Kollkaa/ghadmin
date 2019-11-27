@@ -19,7 +19,7 @@ export class LanguageProvider extends React.Component { // eslint-disable-line r
     const messages = defaultsDeep(this.props.messages[this.props.locale], this.props.messages.en);
 
     return (
-      <IntlProvider locale={this.props.locale} defaultLocale="en" messages={messages}>
+      <IntlProvider locale="es" defaultLocale="es" messages={messages}>
         {React.Children.only(this.props.children)}
       </IntlProvider>
     );

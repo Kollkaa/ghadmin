@@ -24,13 +24,10 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
 
   getFlagUrl = (locale) => {
     switch (locale) {
-      case 'en':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/us.svg';
+      case 'es':
+        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/ua.svg';
       case 'pt-BR':
         return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/br.svg';
-      case 'zh':
-      case 'zh-Hans':
-        return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/cn.svg';
       case 'ar':
         return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/sa.svg';
       case 'ko':
@@ -38,7 +35,7 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
       case 'ja':
         return 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/jp.svg';
       default:
-        return `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/${locale}.svg`;
+        return `https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.1.0/flags/4x3/ua.svg`;
     }
   }
 
@@ -48,19 +45,12 @@ export class LocaleToggle extends React.Component { // eslint-disable-line
     const { locale } = this.props;
 
     return (
-      <div className={styles.localeToggle}>
+     <div className={styles.localeToggle}>
         <ButtonDropdown isOpen={this.state.isOpen} toggle={this.toggle}>
           <DropdownToggle className={styles.localeDropdownContent}>
-            <span>{locale}</span>
+            <span>UA</span>
             <img src={this.getFlagUrl(locale)} alt={locale} />
           </DropdownToggle>
-          <DropdownMenu className={cn(styles.localeDropdownMenu, this.props.isLogged ? '' : styles.localeDropdownMenuNotLogged)}>
-            {languages.map(language => (
-              <DropdownItem key={language} onClick={() => this.props.changeLocale(language)} className={cn(styles.localeToggleItem, locale === language ? styles.localeToggleItemActive : '')}>
-                {language.toUpperCase()}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
         </ButtonDropdown>
       </div>
     );

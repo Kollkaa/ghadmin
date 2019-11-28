@@ -106,33 +106,7 @@ export class Onboarding extends React.Component {
           style={style}
           className={cn(styles.videosContent, this.state.showVideos ? styles.shown : styles.hide)}
         >
-          <div className={styles.videosHeader}>
-            <p>
-              <FormattedMessage id="app.components.Onboarding.title" />
-            </p>
-            {videos.length && (
-              <p>
-                {Math.floor((videos.filter(v => v.end).length * 100) / videos.length)}
-                <FormattedMessage id="app.components.Onboarding.label.completed" />
-              </p>
-            )}
-          </div>
-          <ul className={styles.onboardingList}>
-            {videos.map((video, i) => {
-              return (
-                <OnboardingVideo
-                  key={i}
-                  id={i}
-                  video={video}
-                  onClick={onClick}
-                  setVideoDuration={setVideoDuration}
-                  getVideoCurrentTime={this.updateCurrentTime}
-                  didPlayVideo={this.didPlayVideo}
-                  didStopVideo={this.didStopVideo}
-                />
-              );
-            })}
-          </ul>
+          <p>Тестовый абзац. Этот блок пустой. </p>
         </div>
 
         <div className={styles.openBtn}>

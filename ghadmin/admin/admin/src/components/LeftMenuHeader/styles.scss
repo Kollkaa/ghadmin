@@ -2,9 +2,8 @@
 @import "../../styles/variables/variables";
 
 .leftMenuHeader { /* stylelint-ignore */
-  background: $left-menu-link-hover;
+  background: #343a40;
   height: $header-height;
-  background: linear-gradient(100deg , #1C2, #5231E7);
 }
 
 .projectName {

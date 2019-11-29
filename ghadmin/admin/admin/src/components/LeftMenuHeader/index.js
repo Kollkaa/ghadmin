@@ -14,7 +14,7 @@ function LeftMenuHeader() {
     <div className={styles.leftMenuHeader}>
       <Link to="/" className={styles.leftMenuHeaderLink}>
         <span className={styles.projectName}>
-          <img height = "60px" src={logo}/>
+          <img height = "50px" style = {{marginTop : '5px'}} src={logo}/>
           </span>
       </Link>
     </div>
